@@ -5,7 +5,7 @@ import AudioOut from "pins/audioout";
 import Resource from "Resource";
 
 import Timer from "timer";
-import MPU6050 from "mpu6050";
+import MPU6886 from "mpu6886";
 import MAG3110 from "mag3110";
 import M5Button from "m5button";
 
@@ -41,7 +41,7 @@ export default function (done) {
 	}
 
 	try {
-		state.accelerometerGyro = new MPU6050;
+		state.accelerometerGyro = new MPU6886;
 		state.magnetometer = new MAG3110;
 
 		globalThis.accelerometer = {
