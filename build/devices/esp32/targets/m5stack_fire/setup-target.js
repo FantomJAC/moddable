@@ -57,8 +57,6 @@ export default function (done) {
 				state.accelerometerGyro.configure({ operation: "accelerometer" });
 				const sample = state.accelerometerGyro.sample();
 				if (sample) {
-					sample.y *= -1;
-					sample.z *= -1;
 					state.handleRotation(sample);
 					accelerometer.onreading(sample);
 				}
@@ -108,10 +106,10 @@ export default function (done) {
 					application.rotation = 270;
 				}
 			} else {
-				if (reading.x < -0.7 && application.rotation != 180) {
-					application.rotation = 180;
-				} else if (reading.x > 0.7 && application.rotation != 0) {
+				if (reading.x < -0.7 && application.rotation != 0) {
 					application.rotation = 0;
+				} else if (reading.x > 0.7 && application.rotation != 180) {
+					application.rotation = 180;
 				}
 			}
 		}
