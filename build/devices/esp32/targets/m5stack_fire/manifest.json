@@ -75,7 +75,6 @@
 			"$(MODULES)/drivers/neopixel/*",
 			"$(MODULES)/drivers/neopixel/esp32/*",
 			"$(MODULES)/drivers/mpu6886/*",
-			"$(MODULES)/drivers/mag3110/*",
 			
 			"$(MODULES)/pins/audioin/*",
 			"$(MODULES)/pins/audioin/esp32/*",
@@ -90,7 +89,6 @@
 		"audioin",
 		"setup/target",
 		"mpu6886",
-		"mag3110",
 		"m5button"
 	],
 	"resources": {

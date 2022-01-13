@@ -6,7 +6,6 @@ import Resource from "Resource";
 
 import Timer from "timer";
 import MPU6886 from "mpu6886";
-import MAG3110 from "mag3110";
 import M5Button from "m5button";
 
 import config from "mc/config";
@@ -42,17 +41,13 @@ export default function (done) {
 
 	try {
 		state.accelerometerGyro = new MPU6886;
-		state.magnetometer = new MAG3110;
+		// FIXME: Need BMM150 Driver
 
 		globalThis.accelerometer = {
 			onreading: nop
 		}
 
 		globalThis.gyro = {
-			onreading: nop
-		}
-
-		globalThis.magnetometer = {
 			onreading: nop
 		}
 
@@ -86,16 +81,6 @@ export default function (done) {
 			}, frequency);
 		}
 
-		magnetometer.start = function (frequency) {
-			magnetometer.stop();
-			state.magTimerID = Timer.repeat(id => {
-				const sample = state.magnetometer.sample();
-				if (sample) {
-					magnetometer.onreading(sample);
-				}
-			}, frequency);
-		}
-
 		accelerometer.stop = function(){
 			if (undefined !== state.accelerometerTimerID)
 				Timer.clear(state.accelerometerTimerID);
@@ -106,12 +91,6 @@ export default function (done) {
 			if (undefined !== state.gyroTimerID)
 				Timer.clear(state.gyroTimerID);
 			delete state.gyroTimerID;
-		}
-
-		magnetometer.stop = function () {
-			if (undefined !== state.magTimerID)
-				Timer.clear(state.magTimerID);
-			delete state.magTimerID;
 		}
 	}
 	catch (e) {
